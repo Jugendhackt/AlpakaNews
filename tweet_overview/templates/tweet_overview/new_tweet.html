@@ -1,4 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-new tweet
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button>Senden</button>
+</form>
 {% endblock %}

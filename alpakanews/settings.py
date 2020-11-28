@@ -9,8 +9,13 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import configparser
 import os
 from pathlib import Path
+
+config = configparser.RawConfigParser()
+config.read_file(open('env.cfg', encoding='utf-8'))
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -146,3 +151,9 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+
+
+TWITTER_CONSUMER_KEY = config.get("twitter", 'consumer_key')
+TWITTER_CONSUMER_SECRET = config.get("twitter", 'consumer_secret')
+TWITTER_ACCESS_TOKEN = config.get("twitter", 'access_token')
+TWITTER_ACCESS_TOKEN_SECRET = config.get("twitter", 'access_token_secret')

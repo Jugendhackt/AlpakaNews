@@ -3,7 +3,7 @@ from django.urls import path, include
 
 from tweet_overview import views
 
-app_name="tweet_overview"
+app_name = "tweet_overview"
 
 urlpatterns = [
     path('new_tweet', views.NewTweetView.as_view(), name="new_tweet"),
