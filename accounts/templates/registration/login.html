@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="login-box">
+        <div class="login-snip">
+            <a href="{% url 'login' %}" class="sign-in tab checked">Login</a>
+            <a href="{% url 'accounts:signup' %}" class="sign-up tab">Sign up</a>
+            <div class="login-space">
+                <div class="login">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="group">
+                            <label for="{{ form.username.id_for_label }}" class="label">E-Mail</label>
+                            <input id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" type="text" class="input" placeholder="E-Mail Adresse eingeben">
+                        </div>
+                        <div class="group">
+                            <label for="{{ form.password.id_for_label }}" class="label">Passwort</label>
+                            <input id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" type="password" class="input" data-type="password" placeholder="Passwort eingeben">
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Einloggen">
+                        </div>
+<!--                                <div class="hr"></div>-->
+<!--                                <div class="foot">-->
+<!--                                    <a href="#">Forgot Password?</a>-->
+<!--                                </div>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

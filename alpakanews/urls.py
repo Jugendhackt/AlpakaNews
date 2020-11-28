@@ -20,5 +20,7 @@ import tweet_overview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('overview/', include("tweet_overview.urls", namespace="tweet_overview"))
 ]
