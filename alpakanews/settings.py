@@ -157,3 +157,13 @@ TWITTER_CONSUMER_KEY = config.get("twitter", 'consumer_key')
 TWITTER_CONSUMER_SECRET = config.get("twitter", 'consumer_secret')
 TWITTER_ACCESS_TOKEN = config.get("twitter", 'access_token')
 TWITTER_ACCESS_TOKEN_SECRET = config.get("twitter", 'access_token_secret')
+
+CATEGORY_CHOICES = [
+    ('politik', 'Politik'),
+    ('wirtschaft', 'Wirtschaft'),
+    ('wissenschaft', 'Wissenschaft'),
+    ('kultur', 'Kultur'),
+    ('beauty', 'Beauty'),
+    ('sport', 'Sport'),
+    ('sonstiges', 'Sonstiges')
+]
