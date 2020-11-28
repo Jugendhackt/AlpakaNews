@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView
 
 from accounts.login_required import LoginRequiredMixin
-from core.models import TwitterUser, Tweet
+from core.models import TwitterUser, Tweet, Source
 from tweet_overview import forms
 from tweet_overview.twitterapiclient import TwitterAPIClient
 
@@ -50,12 +50,17 @@ class NewTweetView(LoginRequiredMixin, FormView):
                 name=twitter_user_data['name'],
                 profile_image_url=twitter_user_data['profile_image_url']
             )
-        Tweet.objects.create(
+        tweet = Tweet.objects.create(
             twitter_id=tweet_data['id'],
             added_by=self.request.user,
             content=tweet_data['text'],
             twitter_user=twitter_user,
             category=form.cleaned_data['category']
+        )
+
+        Source.objects.create(
+            link=form.cleaned_data['source_url'],
+            tweet=tweet
         )
 
         return super().form_valid(form)
