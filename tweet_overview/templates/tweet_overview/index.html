@@ -6,9 +6,20 @@ Current category: {{ category }} <br>
     <p>
         <img src="{{ tweet.twitter_user.profile_image_url }}" style="width:48px;height:48px;border-radius:50%;">
         <span class="font-weight-bolder">{{ tweet.twitter_user.name }} (@{{ tweet.twitter_user.username }}) </span>
-        <p class="font-weight-lighter">{{ tweet.content }}</p>
-    
-    <br>
+        <br>
+        <br>
+        <span class="font-weight-lighter">{{ tweet.content }}</span>
+
+        {% for source in tweet.source_set.all %}
+            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <a href="{{ source.link }}" style="margin-top: 2px;"> {{ source.link }} </a>
+                <button type="button" class="btn btn-secondary" style="margin-left:10px;">+</button>
+
+                <button type="button" class="btn btn-secondary">-</button>
+            </div>
+        {% endfor %}
+
+        <br>
     </p>
 
     {% endfor %}
