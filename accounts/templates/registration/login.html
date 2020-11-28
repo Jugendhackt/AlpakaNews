@@ -11,8 +11,8 @@
 <div class="card">
     <div class="login-box">
         <div class="login-snip">
-            <a href="{% url 'login' %}" class="sign-in tab checked">Login</a>
-            <a href="{% url 'accounts:signup' %}" class="sign-up tab">Sign up</a>
+            <a href="{% url 'login' %}" class="sign-in tab checked">Einloggen</a>
+            <a href="{% url 'accounts:signup' %}" class="sign-up tab">Registrieren</a>
             <div class="login-space">
                 <div class="login">
                     <form method="post" action="{% url 'login' %}">
@@ -20,10 +20,12 @@
                         <div class="group">
                             <label for="{{ form.username.id_for_label }}" class="label">E-Mail</label>
                             <input id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" type="text" class="input" placeholder="E-Mail Adresse eingeben">
+                            {{ form.errors.username }}
                         </div>
                         <div class="group">
                             <label for="{{ form.password.id_for_label }}" class="label">Passwort</label>
                             <input id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" type="password" class="input" data-type="password" placeholder="Passwort eingeben">
+                            {{ form.errors.password }}
                         </div>
                         <div class="group">
                             <input type="submit" class="button" value="Einloggen">

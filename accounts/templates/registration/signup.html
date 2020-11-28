@@ -9,8 +9,8 @@
 <div class="card">
     <div class="login-box">
         <div class="login-snip">
-            <a href="{% url 'login' %}" class="sign-in tab">Login</a>
-            <a href="{% url 'accounts:signup' %}" class="sign-up tab checked">Sign up</a>
+            <a href="{% url 'login' %}" class="sign-in tab">Einloggen</a>
+            <a href="{% url 'accounts:signup' %}" class="sign-up tab checked">Registrieren</a>
             <div class="login-space">
                 <div class="sign-up-form">
                     <form method="post" action="{% url 'accounts:signup' %}">
@@ -18,18 +18,22 @@
                         <div class="group">
                             <label for="{{ form.email.id_for_label }}" class="label">E-Mail Adresse</label>
                             <input id="{{ form.email.id_for_label }}" name="{{ form.email.name }}" type="email" class="input" placeholder="E-Mail Adresse eingeben" required>
+                            {{ form.errors.email }}
                         </div>
                         <div class="group">
                             <label for="{{ form.name.id_for_label }}" class="label">Name</label>
                             <input id="{{ form.name.id_for_label }}" name="{{ form.name.name }}" type="text" class="input" placeholder="Name eingeben">
+                            {{ form.errors.name }}
                         </div>
                         <div class="group">
                             <label for="{{ form.password1.id_for_label }}" class="label">Passwort</label>
                             <input id="{{ form.password1.id_for_label }}" name="{{ form.password1.name }}" type="password" class="input" data-type="password" placeholder="Passwort eingeben" required>
+                            {{ form.errors.password1 }}
                         </div>
                         <div class="group">
                             <label for="{{ form.password2.id_for_label }}" class="label">Passwort (Wiederholung)</label>
                             <input id="{{ form.password2.id_for_label }}" name="{{ form.password2.name }}"  type="password" class="input" data-type="password" placeholder="Passwort wiederholen" required>
+                            {{ form.errors.password2 }}
                         </div>
                         <div class="group">
                             <input type="submit" class="button" value="Sign Up">
