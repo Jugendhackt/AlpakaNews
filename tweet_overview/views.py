@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from accounts.login_required import LoginRequiredMixin
 
 
-class IndexView(LoginRequiredMixin, TemplateView):
+class IndexView(TemplateView):
     template_name = "tweet_overview/index.html"
 
     def get_context_data(self, **kwargs):
@@ -23,3 +23,4 @@ class NewTweetView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
 
         return context
+

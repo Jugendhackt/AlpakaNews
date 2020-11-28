@@ -4,6 +4,9 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import FormView
+from django.views.generic import TemplateView
+
+from accounts.login_required import LoginRequiredMixin
 
 from accounts.forms import UserCreationForm
 
@@ -22,3 +25,12 @@ class SignUpView(FormView):
     def register(self, form):
         new_user = form.save()
         return new_user
+
+
+class MyProfileView(LoginRequiredMixin, TemplateView):
+    template_name = "profile/my_profile.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['username'] = self.request.user.name;
+        return context
