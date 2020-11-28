@@ -55,7 +55,7 @@ class NewTweetView(LoginRequiredMixin, FormView):
             added_by=self.request.user,
             content=tweet_data['text'],
             twitter_user=twitter_user,
-            category="politik",
+            category=form.cleaned_data['category']
         )
 
         return super().form_valid(form)

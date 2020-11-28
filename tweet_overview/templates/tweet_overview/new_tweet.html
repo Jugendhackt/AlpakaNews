@@ -2,7 +2,36 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {{ form }}
-    <button>Senden</button>
+    <div class="container" style="margin-top: 5vh">
+        <div class="form-group">
+            <div class="form-check">
+                <label for="{{ form.twitter_url.id_for_label }}">Tweet URL</label>
+                <input type="text" class="form-control{% if form.errors.twitter_url %} is-invalid{% endif %}" id="{{ form.twitter_url.id_for_label }}" name="{{ form.twitter_url.name }}" required>
+                {% if form.errors.twitter_url %}
+                <div class="invalid-feedback">
+                    {{ form.errors.twitter_url }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <label for="{{ form.source_url.id_for_label }}">URL der Hauptquelle</label>
+                <input type="text" class="form-control{% if form.errors.source_url %} is-invalid{% endif %}" id="{{ form.source_url.id_for_label }}" name="{{ form.source_url.name }}" required>
+                {% if form.errors.source_url %}
+                <div class="invalid-feedback">
+                    {{ form.errors.source_url }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <label>Kategorie:</label>
+                {{ form.category }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 {% endblock %}

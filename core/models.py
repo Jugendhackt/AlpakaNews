@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from accounts.models import User
@@ -15,15 +16,7 @@ class Tweet(models.Model):
     added_by = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     twitter_user = models.ForeignKey(TwitterUser, on_delete=models.CASCADE)
-    category = models.CharField(choices=[
-        ('politik', 'Politik'),
-        ('wirtschaft', 'Wirtschaft'),
-        ('wissenschaft', 'Wissenschaft'),
-        ('kultur', 'Kultur'),
-        ('beauty', 'Beauty'),
-        ('sport', 'Sport'),
-        ('sonstiges', 'Sonstiges')
-    ], max_length=255, default='other')
+    category = models.CharField(choices=settings.CATEGORY_CHOICES, max_length=255, default='other')
 
 
 class Source(models.Model):
