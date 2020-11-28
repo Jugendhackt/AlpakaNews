@@ -13,9 +13,9 @@ Current category: {{ category }} <br>
         {% for source in tweet.source_set.all %}
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                 <a href="{{ source.link }}" style="margin-top: 2px;"> {{ source.link }} </a>
-                <button type="button" class="btn btn-secondary" style="margin-left:10px;">+</button>
-
-                <button type="button" class="btn btn-secondary">-</button>
+                <a href="{% url 'tweet_overview:vote' source.id 'true' %}" type="button" class="btn btn-secondary" style="margin-left:10px;">+</a>
+                <span>{{source.current_vote_number}}</span>
+                <a href="{% url 'tweet_overview:vote' source.id 'false' %}" type="button" class="btn btn-secondary">-</a>
             </div>
         {% endfor %}
 

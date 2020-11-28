@@ -23,8 +23,19 @@ class Source(models.Model):
     tweet = models.ForeignKey(Tweet, on_delete=models.CASCADE)
     link = models.CharField(max_length=255)
 
+    def current_vote_number(self):
+        votes = Vote.objects.filter(
+            source=self,
+        )
+        vote_result = 0
+        for vote in votes:
+            if vote.is_fitting is True:
+                vote_result += 1
+            else:
+                vote_result -= 1
+        return vote_result
 
 class Vote(models.Model):
     source = models.ForeignKey(Source, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    is_fitting = models.CharField(max_length=255)
+    is_fitting = models.BooleanField(max_length=255)

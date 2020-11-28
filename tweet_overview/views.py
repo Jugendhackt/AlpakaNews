@@ -2,11 +2,13 @@
 import re
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView
+from django.views.generic.base import View
 
 from accounts.login_required import LoginRequiredMixin
-from core.models import TwitterUser, Tweet, Source
+from core.models import TwitterUser, Tweet, Source, Vote
 from tweet_overview import forms
 from tweet_overview.twitterapiclient import TwitterAPIClient
 
@@ -65,3 +67,24 @@ class NewTweetView(LoginRequiredMixin, FormView):
         )
 
         return super().form_valid(form)
+
+
+class VoteView(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        if kwargs['is_fitting'] == "True" or kwargs['is_fitting'] == "true":
+            is_fitting = True
+        else:
+            is_fitting = False
+        try:
+            current_vote = Vote.objects.get(source_id=kwargs['id'], user=self.request.user)
+            if current_vote.is_fitting != is_fitting:
+                current_vote.is_fitting = is_fitting
+                current_vote.save()
+        except ObjectDoesNotExist:
+            Vote.objects.create(
+                source_id=kwargs['id'],
+                user=self.request.user,
+                is_fitting=is_fitting
+            )
+
+        return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
