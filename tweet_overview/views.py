@@ -8,3 +8,9 @@ from accounts.login_required import LoginRequiredMixin
 
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = "tweet_overview/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['test'] = "Hello World!"
+
+        return context
