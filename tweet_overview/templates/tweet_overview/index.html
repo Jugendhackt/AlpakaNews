@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-Current category: {{ category }} <br>
+<br>
 <div class="container">
     {% for tweet in tweets %}
     <p>
@@ -11,13 +11,22 @@ Current category: {{ category }} <br>
         <span class="font-weight-lighter">{{ tweet.content }}</span>
 
         {% for source in tweet.source_set.all %}
-            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+            <div class="btn-group  btn-group-sm" role="group" aria-label="Voting">
                 <a href="{{ source.link }}" style="margin-top: 2px;"> {{ source.link }} </a>
-                <a href="{% url 'tweet_overview:vote' source.id 'true' %}" type="button" class="btn btn-secondary" style="margin-left:10px;">+</a>
+
+                <a href="{% url 'tweet_overview:vote' source.id 'true' %}" type="button" class="btn btn-secondary" style="margin-left:10px;margin-right:5px;border-radius:10%;">👍</a>
                 <span>{{source.current_vote_number}}</span>
-                <a href="{% url 'tweet_overview:vote' source.id 'false' %}" type="button" class="btn btn-secondary">-</a>
+                <a href="{% url 'tweet_overview:vote' source.id 'false' %}" type="button" class="btn btn-secondary" style="margin-left:5px;border-radius:10%;">👎</a>
             </div>
         {% endfor %}
+
+        <br><br>
+
+        <div class="form-group">
+            <label for="comment">Kommentar:</label>
+            <textarea class="form-control" id="comment"></textarea>
+        </div>
+        <button type="button" class="btn btn-dark" style="float: right;">Absenden</button>
 
         <br>
     </p>
