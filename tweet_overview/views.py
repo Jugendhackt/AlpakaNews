@@ -18,7 +18,7 @@ class IndexView(TemplateView):
     template_name = "tweet_overview/index.html"
 
     def get_context_data(self, **kwargs):
-        tweets = Tweet.objects.filter(category=kwargs["category"])
+        tweets = Tweet.objects.filter(category=kwargs["category"]).order_by('-id')
         context = super().get_context_data(**kwargs)
 
 
