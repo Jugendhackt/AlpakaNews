@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-Hello {{ username }}!<br>
-This page is under construction.
+<div class="container">
+    Hello {{ username }}!<br>
+    This page is under construction.
+    <br>
+    <a href="{% url 'logout' %}" class="btn btn-info" role="button">Ausloggen</a>
+</div>
 {% endblock %}
