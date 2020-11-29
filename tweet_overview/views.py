@@ -3,6 +3,7 @@ import re
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView
 from django.views.generic.base import View
@@ -29,7 +30,6 @@ class IndexView(TemplateView):
 class NewTweetView(LoginRequiredMixin, FormView):
     template_name = "tweet_overview/new_tweet.html"
     form_class = forms.NewTweetForm
-    success_url = reverse_lazy('tweet_overview:index', args={'category': 'politics'})
 
     def form_valid(self, form):
         twitter_api_client = TwitterAPIClient()
@@ -66,7 +66,7 @@ class NewTweetView(LoginRequiredMixin, FormView):
             tweet=tweet
         )
 
-        return super().form_valid(form)
+        return redirect('tweet_overview:index', category=form.cleaned_data['category'])
 
 
 class VoteView(LoginRequiredMixin, View):
