@@ -51,6 +51,10 @@ class Source(models.Model):
             is_fitting=False
         ).count()
 
+    def is_link_verified(self):
+        for source in settings.VERIFIED_SOURCES:
+            if source in self.link:
+                return True
 
 class Vote(models.Model):
     source = models.ForeignKey(Source, on_delete=models.CASCADE)

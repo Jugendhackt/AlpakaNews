@@ -169,13 +169,14 @@ CATEGORY_CHOICES = [
 ]
 VERIFIED_SOURCES = [
     'https://www.ard.de',
-    'https://www.zdf.de ',
-    'https://www1.wdr.de/index.html ',
-    'https://www.rki.de/DE/Home/homepage_node.html',
+    'https://www.zdf.de',
+    'https://www1.wdr.de',
+    'https://www.rki.de',
     'https://de.wikipedia.org',
-    'https://www.bmbf.de/de/gesundheitsforschung-136.html',
-    'https://www.bmbf.de/de/umwelt-und-klima-145.html',
+    'https://www.bmbf.de',
     'https://www.bbc.com',
-    'https://www.bbc.com',
-  
+    'https://www.nytimes.com',
+    'https://www.zeit.de',
+    'https://www.spiegel.de',
+    'https://www.sueddeutsche.de',
 ]

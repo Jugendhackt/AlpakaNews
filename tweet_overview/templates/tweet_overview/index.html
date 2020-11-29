@@ -16,6 +16,9 @@
         {% for source in tweet.source_set.all %}
             <div class="btn-group  btn-group-sm" role="group" aria-label="Voting">
                 <a href="{{ source.link }}" style="margin-top: 2px;"> {{ source.link }} </a>
+                {% if source.is_link_verified %}
+                <span class="badge badge-success" style="margin-left: 5px; line-height: 2">vertrauenswürdig</span>
+                {% endif %}
                 <a href="{% url 'tweet_overview:vote' source.id 'true' %}" type="button" class="btn btn-secondary" style="margin-left:10px;margin-right:5px;border-radius:10%;">👍 ({{ source.current_upvotes }})</a>
                 <a href="{% url 'tweet_overview:vote' source.id 'false' %}" type="button" class="btn btn-secondary" style="margin-left:5px;border-radius:10%;">👎 ({{ source.current_downvotes }})</a>
             </div>
