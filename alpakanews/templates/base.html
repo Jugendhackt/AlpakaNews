@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +51,7 @@
       </div>
       <div class="mx-auto order-0">
           <a class="navbar-brand mx-auto" href="{% url 'core:home' %}">
-              <img src="static/aufkleber_Approved.jpg" style="width:48px;height:48px;border-radius:50%;">
+              <img src="{% static 'aufkleber_Approved.jpg' %}" style="width:48px;height:48px;border-radius:50%;">
               AlpakaNews
           </a>
 
