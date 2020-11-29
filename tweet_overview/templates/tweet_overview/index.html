@@ -36,7 +36,15 @@
         </form>
         <br>
         <br>
-        <hr width=”75%”>
+        <hr width=”100%”>
+
+        {% for comment in tweet.comment_set.all %}
+            <span class="font-weight-bolder">{{ comment.author.name }}: </span>
+            <span class="font-weight-lighter">{{ comment.text }}</span>
+            <br>
+            <hr width=”25%”>
+        {% endfor %}
+        <br>
     </p>
     {% endfor %}
 </div>
