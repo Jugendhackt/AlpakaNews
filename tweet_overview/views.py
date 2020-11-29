@@ -25,7 +25,13 @@ class IndexView(TemplateView):
 
         context['tweets'] = tweets
         context['add_comment_form'] = forms.AddCommentForm()
-        context['peviewComments'] = 5
+
+        if(tweets.count() > 0):
+            context['empty_site'] = False
+        else:
+            context['empty_site'] = True
+
+        print(tweets.count())
 
         if self.request.GET.get('message') is not None:
             context['warning_message'] = self.request.GET.get('message')

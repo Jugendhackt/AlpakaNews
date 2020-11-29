@@ -6,6 +6,15 @@
         {{ warning_message }}
     </div>
     {% endif %}
+
+    {% if empty_site %}
+    <div class="col text-center">
+        <span class="font-weight-lighter">hmm.. Hier wurde noch kein Tweet hinzugefügt!</span>
+        <br>
+        <button type="submit" class="btn btn-info" style="margin-top: 10px;" onclick="window.location.href='{% url 'tweet_overview:new_tweet' %}';">Tweet hinzufügen!</button>
+    </div>
+    {% endif %}
+
     {% for tweet in tweets %}
     <p>
         <img src="{{ tweet.twitter_user.profile_image_url }}" style="width:48px;height:48px;border-radius:50%;">
@@ -38,9 +47,10 @@
         <br>
         <hr width=”100%”>
 
-        {% for comment in tweet.comment_set.all %}
+        {% for comment in tweet.comment_set.all reversed %}
             <span class="font-weight-bolder">{{ comment.author.name }}: </span>
-            <span class="font-weight-lighter">{{ comment.text }}</span>
+            <span class="font-weight-lighter" style="word-break: break-all;">{{ comment.text }}</span>
+            <span class="font-weight-lighter" style="float: right;">({{ comment.created_at }})</span>
             <br>
             <hr width=”25%”>
         {% endfor %}
