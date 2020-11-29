@@ -179,4 +179,5 @@ VERIFIED_SOURCES = [
     'https://www.zeit.de',
     'https://www.spiegel.de',
     'https://www.sueddeutsche.de',
+    'https://www.tagesschau.de'
 ]
