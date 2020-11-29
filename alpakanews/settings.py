@@ -181,3 +181,5 @@ VERIFIED_SOURCES = [
     'https://www.sueddeutsche.de',
     'https://www.tagesschau.de'
 ]
+
+LOGOUT_REDIRECT_URL = "/"
