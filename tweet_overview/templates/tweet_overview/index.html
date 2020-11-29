@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<br>
-<div class="container">
+<div class="container" style="margin-top: 5vh;">
     {% if warning_message %}
     <div class="alert alert-warning" role="alert">
         {{ warning_message }}
@@ -12,22 +11,17 @@
         <img src="{{ tweet.twitter_user.profile_image_url }}" style="width:48px;height:48px;border-radius:50%;">
         <span class="font-weight-bolder">{{ tweet.twitter_user.name }} (@{{ tweet.twitter_user.username }}) </span>
         <span class="font-weight-lighter" style="float: right;">Hinzugefügt von {{ tweet.added_by.name }}</span>
-        <br>
-        <br>
+        <br><br>
         <span class="font-weight-lighter">{{ tweet.content }}</span>
-
         {% for source in tweet.source_set.all %}
             <div class="btn-group  btn-group-sm" role="group" aria-label="Voting">
                 <a href="{{ source.link }}" style="margin-top: 2px;"> {{ source.link }} </a>
-
                 <a href="{% url 'tweet_overview:vote' source.id 'true' %}" type="button" class="btn btn-secondary" style="margin-left:10px;margin-right:5px;border-radius:10%;">👍</a>
                 <span>{{source.current_vote_number}}</span>
                 <a href="{% url 'tweet_overview:vote' source.id 'false' %}" type="button" class="btn btn-secondary" style="margin-left:5px;border-radius:10%;">👎</a>
             </div>
         {% endfor %}
-
         <br><br>
-
         <form action="{% url 'tweet_overview:add_comment' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
@@ -38,13 +32,10 @@
             <input type="hidden" name="{{ add_comment_form.category.name }}" value="{{ category }}">
             <button type="submit" class="btn btn-dark" style="float: right;">Absenden</button>
         </form>
-
         <br>
         <br>
         <hr width=”75%”>
     </p>
-
     {% endfor %}
 </div>
-
 {% endblock %}

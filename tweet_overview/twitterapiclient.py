@@ -1,5 +1,5 @@
-from TwitterAPI import TwitterAPI
 from django.conf import settings
+from TwitterAPI import TwitterAPI
 
 
 class TwitterAPIClient:

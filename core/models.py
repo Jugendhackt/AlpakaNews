@@ -16,7 +16,10 @@ class Tweet(models.Model):
     added_by = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     twitter_user = models.ForeignKey(TwitterUser, on_delete=models.CASCADE)
-    category = models.CharField(choices=settings.CATEGORY_CHOICES, max_length=255, default='other')
+    category = models.CharField(
+        choices=settings.CATEGORY_CHOICES,
+        max_length=255,
+        default='other')
 
 
 class Source(models.Model):
