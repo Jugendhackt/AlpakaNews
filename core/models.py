@@ -39,6 +39,18 @@ class Source(models.Model):
                 vote_result -= 1
         return vote_result
 
+    def current_upvotes(self):
+        return Vote.objects.filter(
+            source=self,
+            is_fitting=True
+        ).count()
+
+    def current_downvotes(self):
+        return Vote.objects.filter(
+            source=self,
+            is_fitting=False
+        ).count()
+
 
 class Vote(models.Model):
     source = models.ForeignKey(Source, on_delete=models.CASCADE)
