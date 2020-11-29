@@ -6,6 +6,7 @@
     <p>
         <img src="{{ tweet.twitter_user.profile_image_url }}" style="width:48px;height:48px;border-radius:50%;">
         <span class="font-weight-bolder">{{ tweet.twitter_user.name }} (@{{ tweet.twitter_user.username }}) </span>
+        <span class="font-weight-lighter" style="float: right;">Hinzugefügt von {{ tweet.added_by.name }}</span>
         <br>
         <br>
         <span class="font-weight-lighter">{{ tweet.content }}</span>
@@ -29,6 +30,8 @@
         <button type="button" class="btn btn-dark" style="float: right;">Absenden</button>
 
         <br>
+        <br>
+        <hr width=”75%”>
     </p>
 
     {% endfor %}
