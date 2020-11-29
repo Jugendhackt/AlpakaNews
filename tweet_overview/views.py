@@ -31,8 +31,6 @@ class IndexView(TemplateView):
         else:
             context['empty_site'] = True
 
-        print(tweets.count())
-
         if self.request.GET.get('message') is not None:
             context['warning_message'] = self.request.GET.get('message')
 
