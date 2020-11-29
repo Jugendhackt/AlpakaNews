@@ -5,11 +5,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.http import urlencode
 from django.views.generic import TemplateView, FormView
 from django.views.generic.base import View
 
 from accounts.login_required import LoginRequiredMixin
-from core.models import TwitterUser, Tweet, Source, Vote
+from core.models import TwitterUser, Tweet, Source, Vote, Comment
 from tweet_overview import forms
 from tweet_overview.twitterapiclient import TwitterAPIClient
 
@@ -21,8 +22,11 @@ class IndexView(TemplateView):
         tweets = Tweet.objects.filter(category=kwargs["category"]).order_by('-id')
         context = super().get_context_data(**kwargs)
 
-
         context['tweets'] = tweets
+        context['add_comment_form'] = forms.AddCommentForm()
+
+        if self.request.GET.get('message') is not None:
+           context['warning_message'] = self.request.GET.get('message')
 
         return context
 
@@ -88,3 +92,21 @@ class VoteView(LoginRequiredMixin, View):
             )
 
         return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
+
+
+class AddComment(LoginRequiredMixin, View):
+    form_class = forms.AddCommentForm
+
+    def post(self, *args, **kwargs):
+        form = forms.AddCommentForm(self.request.POST)
+        if form.is_valid():
+            Comment.objects.create(
+                author=self.request.user,
+                tweet_id=form.cleaned_data['tweet_id'],
+                text=form.cleaned_data['text']
+            )
+            return redirect('tweet_overview:index', category=form.cleaned_data['category'])
+        else:
+            base_url = reverse_lazy('tweet_overview:index', kwargs={'category': form.cleaned_data['category']})
+            warning_message = urlencode({'message': "Da ist wohl was schiefgelaufen, bitte versuche es erneut"})
+            return redirect(f'{base_url}?{warning_message}')

@@ -2,6 +2,11 @@
 {% block content %}
 <br>
 <div class="container">
+    {% if warning_message %}
+    <div class="alert alert-warning" role="alert">
+        {{ warning_message }}
+    </div>
+    {% endif %}
     {% for tweet in tweets %}
     <p>
         <img src="{{ tweet.twitter_user.profile_image_url }}" style="width:48px;height:48px;border-radius:50%;">
@@ -23,11 +28,16 @@
 
         <br><br>
 
-        <div class="form-group">
-            <label for="comment">Kommentar:</label>
-            <textarea class="form-control" id="comment"></textarea>
-        </div>
-        <button type="button" class="btn btn-dark" style="float: right;">Absenden</button>
+        <form action="{% url 'tweet_overview:add_comment' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ add_comment_form.text.id_for_label }}">Kommentar:</label>
+                <textarea class="form-control" id="{{ add_comment_form.text.id_for_label }}" name="{{ add_comment_form.text.name }}" required></textarea>
+            </div>
+            <input type="hidden" name="{{ add_comment_form.tweet_id.name }}" value="{{ tweet.id }}">
+            <input type="hidden" name="{{ add_comment_form.category.name }}" value="{{ category }}">
+            <button type="submit" class="btn btn-dark" style="float: right;">Absenden</button>
+        </form>
 
         <br>
         <br>

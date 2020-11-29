@@ -19,3 +19,16 @@ class NewTweetForm(forms.Form):
         choices=settings.CATEGORY_CHOICES,
         required=True
     )
+
+
+class AddCommentForm(forms.Form):
+    text = forms.CharField(
+        label="Kommentartext:",
+        required=True
+    )
+    tweet_id = forms.CharField(
+        required=True
+    )
+    category = forms.CharField(
+        required=True
+    )

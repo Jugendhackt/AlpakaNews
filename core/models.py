@@ -35,7 +35,14 @@ class Source(models.Model):
                 vote_result -= 1
         return vote_result
 
+
 class Vote(models.Model):
     source = models.ForeignKey(Source, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_fitting = models.BooleanField(max_length=255)
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    tweet = models.ForeignKey(Tweet, on_delete=models.CASCADE)
+    text = models.TextField()
