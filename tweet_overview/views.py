@@ -60,7 +60,8 @@ class NewTweetView(LoginRequiredMixin, FormView):
                 twitter_id=tweet_data['author_id'],
                 username=twitter_user_data['username'],
                 name=twitter_user_data['name'],
-                profile_image_url=twitter_user_data['profile_image_url']
+                profile_image_url=twitter_user_data['profile_image_url'],
+                verified=twitter_user_data['verified']
             )
         tweet = Tweet.objects.create(
             twitter_id=tweet_data['id'],

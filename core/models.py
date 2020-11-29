@@ -9,6 +9,7 @@ class TwitterUser(models.Model):
     username = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     profile_image_url = models.CharField(max_length=255)
+    verified = models.BooleanField(default=False)
 
 
 class Tweet(models.Model):

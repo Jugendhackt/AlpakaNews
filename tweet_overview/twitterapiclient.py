@@ -21,7 +21,7 @@ class TwitterAPIClient:
 
     def get_user_data(self, user_id):
         r = self.api.request(f'users/:{user_id}', {
-            'user.fields': 'id,name,username,profile_image_url'
+            'user.fields': 'id,name,username,profile_image_url,verified'
         })
         for item in r:
             return item
